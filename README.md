@@ -2,4 +2,3 @@
 Thesis Project
 Computer Science Engineering
 Sodbayar Munkhsaikhan 
-University of Pecs
