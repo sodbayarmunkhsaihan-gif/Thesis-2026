@@ -1,0 +1,33 @@
+name: Sodbayar Munkhsaikhan
+neptun: KO4NHK
+id: 2026-OL-02
+
+# Implementation of a Consistent Dynamic Game World in a Text Adventure Based on Large Language Models
+
+## My interpretation of the brief
+
+The project is a text adventure game where an LLM generates the story while the program keeps the game world and its state consistent.
+
+## Why I am a good fit for this project
+
+I am interested in AI, games, and interactive applications. I would like to learn how LLMs can be used to create a dynamic game.
+
+## Relevant experience and background
+
+I have basic programming knowledge from my Computer Science Engineering studies and I am motivated to learn new technologies.
+
+## Proposed approach
+
+I would first build a simple text adventure and game state, then integrate an LLM for dynamic story generation and add saving and consistency handling.
+
+## Initial plan
+
+1. Define the game world and basic rules.
+2. Build a simple text adventure.
+3. Add the LLM.
+4. Add saving and consistency handling.
+5. Test the system.
+
+## Additional information
+
+I plan to use Git from the beginning and develop the project step by step.
