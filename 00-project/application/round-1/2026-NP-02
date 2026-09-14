@@ -1,0 +1,35 @@
+---
+name: Sodbayar Munkhsaikhan
+neptun: KO4NHK
+id: 2026-NP-02
+---
+
+# Procedural Generation and Automatic Evaluation of Game Levels
+
+## My interpretation of the brief
+
+The project is about automatically creating game levels and evaluating them based on properties such as solvability, difficulty, and diversity.
+
+## Why I am a good fit for this project
+
+I am interested in games, programming, and algorithms. I like the idea of creating different game levels automatically.
+
+## Relevant experience and background
+
+I have basic programming knowledge from my Computer Science Engineering studies and I am interested in improving my programming skills.
+
+## Proposed approach
+
+I would create a simple level generator, check whether the generated levels can be completed, and compare different generation approaches.
+
+## Initial plan
+
+1. Define the level structure.
+2. Build a basic generator.
+3. Add level evaluation.
+4. Add another generation approach.
+5. Compare the results.
+
+## Additional information
+
+I plan to use Git from the beginning and develop the project step by step.
