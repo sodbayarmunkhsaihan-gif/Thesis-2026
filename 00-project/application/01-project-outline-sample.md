@@ -1,7 +1,7 @@
 ---
 
 name: Sodbayar Munkhsaikhan
-neptun: K04NHK
+neptun: KO4NHK
 id: 2026-OG-02
 github:https://github.com/sodbayarmunkhsaihan-gif/Thesis-2026.git
 github_project:https://github.com/users/sodbayarmunkhsaihan-gif/projects/2
