@@ -131,7 +131,7 @@ The first version will focus on a small, single-player adventure with the essent
 
 1. The player makes decisions and changes the game world.
 2. The player saves the game.
-3. The system stores the current game state and player loads it and coontinues.
+3. The system stores the current game state and player loads it and continues.
 
  
 ---
