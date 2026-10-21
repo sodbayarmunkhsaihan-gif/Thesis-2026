@@ -1,179 +1,182 @@
-⸻
-
-project_outline: “[[00-project/01-project-outline]]”
+---
+project_outline: "[[00-project/01-project-outline]]"
+---
 
 <!-- @slide Title -->
+
 <!-- 5xl -->
 
-Implementation of a Consistent Dynamic Game World in a Text Adventure Based on Large Language Models
+# Implementation of a Consistent Dynamic Game World in a Text Adventure Based on Large Language Models
 
-Author: Sodbayar Munkhsaikhan
-Neptun: KO4NHK
-Supervisor: Gábor OLÁH
+Author: Sodbayar Munkhsaikhan  
+Neptun: KO4NHK  
+Supervisor: Gábor OLÁH  
 Project ID: 2026-OG-02
 
-⸻
-
+---
 <!-- @slide Problem -->
 <!-- @layout AAB -->
 
-Problem
+## Problem
 
 <!-- @set-align left -->
 
-* LLMs can generate interesting stories and dialogues.
-* During long adventures, they may forget or change important facts.
-* For example, a key may still appear on a table after the player picks it up.
-* This makes the game world inconsistent and player choices less meaningful.
+- Large language models (LLMs) can generate **interesting stories and dialogues**.
+- During a long adventure, an LLM may **forget or change important facts**.
+- For example, the player picks up a key, but later the story describes the key as still lying on the table.
+- This can make the game world feel **inconsistent** and make player decisions less meaningful.
 
 <!-- @callout question -->
 
-How can an LLM generate a flexible story while keeping important game facts consistent?
+> How can we let an LLM generate a flexible story while keeping the important facts of the game world consistent?
 
-⸻
-
+---
 <!-- @slide Project idea -->
 
-From player decisions to a consistent story
+## From player decisions to a consistent story
 
-flowchart TD
-    P["Player action"] --> V["Check action"]
-    V --> S["Update world state"]
-    S --> C["Provide relevant facts"]
-    C --> L["Generate next story"]
+```mermaid
+flowchart LR
+    P["Player chooses an action"] --> V["Application checks the action"]
+    V --> S["Update structured world state"]
+    S --> C["Provide relevant context to the LLM"]
+    C --> L["Generate the next part of the story"]
     L --> P
+```
 
-The application stores important game facts separately from the story.
+The application stores important facts separately from the generated story.
 
-For example, when the player picks up a key, the application updates its location to the player’s inventory. The LLM receives this information before generating the next story.
+For example, when the player picks up a key, the application updates its location to the player's inventory. The LLM then receives this information when generating the next part of the story.
 
 <!-- @note -->
 
-World state: Information about the current game, including characters, locations, objects, inventory, and important events.
+> **World state:** structured information about the current game, such as character locations, objects, inventory, and important events. The LLM generates the story, while the application keeps track of the actual game state.
 
-⸻
-
+---
 <!-- @slide Target users -->
 
-Target users
+## Target users
 
 <!-- @set-align left -->
 
-Players who enjoy interactive text adventures.
+<!-- @set-width 70% -->
 
-They want to:
+**Players** who enjoy interactive, text-based adventure games and want their decisions to influence the story and game world.
 
-* Make meaningful choices.
-* Explore a consistent game world.
-* Save and continue later.
-* See the story change with their decisions.
+Players want to:
 
-Other stakeholders: The supervisor and university evaluate the project.
+- Make choices that have meaningful consequences.
+- Explore a world with consistent characters and objects.
+- Save their progress and continue later.
+- Experience a story that responds to previous decisions.
 
-⸻
+The project supervisor and university are also stakeholders who evaluate the project's design and implementation.
 
+---
 <!-- @slide Planned scope -->
 
-Planned scope
+## Planned scope
 
 <!-- @set-align left -->
+
 <!-- @columns 2 4 -->
 
-In scope
+### In scope
 
-* LLM-generated stories
-* Player choices and world changes
-* Characters, objects, and locations
-* Basic consistency checks
-* Save and load
-* Compare two memory approaches
-* Test key functions
+- LLM-generated stories and dialogue
+- Player decisions that change the world
+- Structured characters, locations, objects, and events
+- Basic consistency and contradiction handling
+- Saving and loading game sessions
+- Comparison of two context or memory approaches
+- Tests for important state-management functions
 
 <!-- @col-break -->
 
-Out of scope
+### Out of scope
 
-* Multiplayer
-* 3D graphics
-* AI-generated images
-* Automatically created large worlds
-* Complex NPC memory
+- Multiplayer gameplay
+- Complex 3D graphics
+- AI-generated images
+- Large worlds created automatically by the game
+- Complex memory systems for many non-player characters (NPCs)
 
 <!-- @columns -->
 
-The first version will be a small, single-player adventure.
+The first version will focus on a small, single-player adventure with the essential features working reliably.
 
-⸻
-
+---
 <!-- @slide Rules -->
 
-Rules behind the game world
+## Rules behind the game world
 
 <!-- @set-align left -->
 
-* The application controls important facts.
-* Actions are checked before the world changes.
-* Important facts stay consistent. An object cannot be in two places at once.
-* The story uses the current world state. The LLM receives relevant information before generating the next part.
-* Saving preserves progress. Loading restores the game state, not just the story text.
+- **The application controls important facts.** The LLM does not independently decide the stored world state.
+- **Actions are checked before the game state changes.** Invalid actions should not lead to impossible situations.
+- **Important facts must stay consistent.** For example, an object cannot be in the player's inventory and on a table at the same time.
+- **The story uses the current world state.** The LLM receives relevant information before generating the next part.
+- **Saving keeps the player's progress.** When a game is loaded, the important game information should be restored, not just the story text.
 
 <!-- @note -->
 
-These are planned design rules. The project will investigate how to detect and handle contradictions between the generated story and the stored world state.
+> These are planned design rules, not implemented or tested features yet. One research question is how to find and handle contradictions when the LLM generates a story that does not match the current game state.
 
-⸻
-
+---
 <!-- @slide Initial user journeys -->
 
-Initial user journeys
+## Initial user journeys
 
+```mermaid
 flowchart TD
-    A["Start game"] --> B{"New or saved?"}
-    B -->|New| C["Generate opening story"]
-    B -->|Saved| D["Restore game state"]
-    C --> E["Choose action"]
+    A["Start screen"] --> B{"New or saved game?"}
+    B -->|New game| C["Generate opening story"]
+    B -->|Load game| D["Restore saved state"]
+    C --> E["Read story and choose an action"]
     D --> E
-    E --> F["Update world state"]
-    F --> G["Generate next story"]
+    E --> F["Update game-world state"]
+    F --> G["Generate next story using relevant information"]
     G --> H{"Continue or save?"}
     H -->|Continue| E
-    H -->|Save| I["Save game state"]
+    H -->|Save| I["Store current game state"]
+```
 
-1. Start and play
+### Journey 1: Start and play
 
-1. Start a new game.
-2. Read the opening story.
-3. Choose an action.
-4. Update the world state.
-5. Generate the next story.
+1. The player starts a new adventure.
+2. The system generates the opening story.
+3. The player chooses an action.
+4. The system updates the game-world state.
+5. The LLM generates the next part of the story using relevant information.
 
-2. Save and continue
+### Journey 2: Save and continue
 
-1. Save the current game.
-2. Store the world state.
-3. Load the game later.
-4. Continue from the saved state.
+1. The player makes decisions and changes the game world.
+2. The player saves the game.
+3. The system stores the current game state.
+4. The player loads the saved game later.
+5. The adventure continues from the saved state.
 
-⸻
-
+---
 <!-- @slide Research and next steps -->
 
-Research and next steps
+## Research and next steps
 
 <!-- @set-align left -->
 
-1. Define the world model: characters, objects, locations, and events.
-2. Compare two memory approaches: consistency, token usage, and scalability.
-3. Plan LLM context: choose relevant facts and conversation history.
-4. Plan consistency and saving: handle invalid actions and restore saved games.
-5. Prepare for Semester 2: choose technologies and plan implementation.
+<!-- @set-width 80% -->
 
-This semester focuses on the specification and technical plan.
+1. **Define the world model:** decide how characters, locations, objects, inventory, and events will be represented.
+2. **Compare two context or memory approaches:** evaluate consistency, token usage, and scalability.
+3. **Define the LLM interaction:** decide which world information and conversation history should be sent to the LLM.
+4. **Plan consistency checks and saving:** decide how to prevent invalid changes to the game state and how to save and load games.
+5. **Prepare for Semester 2:** select suitable technologies and implement the planned core features.
 
-⸻
+The main goal of this semester is to produce a clear specification and a realistic technical plan before implementation begins.
 
+---
 <!-- @slide End -->
 
-Thank you
+## Thank you
 
 Questions and feedback are welcome.
