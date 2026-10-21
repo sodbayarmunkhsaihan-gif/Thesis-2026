@@ -35,14 +35,6 @@ Project ID: 2026-OG-02
 
 ## From player decisions to a consistent story
 
-```mermaid
-flowchart LR
-    P["Player chooses an action"] --> V["Application checks the action"]
-    V --> S["Update structured world state"]
-    S --> C["Provide relevant context to the LLM"]
-    C --> L["Generate the next part of the story"]
-    L --> P
-```
 
 The application stores important facts separately from the generated story.
 
@@ -89,7 +81,7 @@ The project supervisor and university are also stakeholders who evaluate the pro
 - Basic consistency and contradiction handling
 - Saving and loading game sessions
 - Comparison of two context or memory approaches
-- Tests for important state-management functions
+
 
 <!-- @col-break -->
 
@@ -127,20 +119,6 @@ The first version will focus on a small, single-player adventure with the essent
 
 ## Initial user journeys
 
-```mermaid
-flowchart TD
-    A["Start screen"] --> B{"New or saved game?"}
-    B -->|New game| C["Generate opening story"]
-    B -->|Load game| D["Restore saved state"]
-    C --> E["Read story and choose an action"]
-    D --> E
-    E --> F["Update game-world state"]
-    F --> G["Generate next story using relevant information"]
-    G --> H{"Continue or save?"}
-    H -->|Continue| E
-    H -->|Save| I["Store current game state"]
-```
-
 ### Journey 1: Start and play
 
 1. The player starts a new adventure.
@@ -153,10 +131,9 @@ flowchart TD
 
 1. The player makes decisions and changes the game world.
 2. The player saves the game.
-3. The system stores the current game state.
-4. The player loads the saved game later.
-5. The adventure continues from the saved state.
+3. The system stores the current game state and player loads it and coontinues.
 
+ 
 ---
 <!-- @slide Research and next steps -->
 
@@ -172,7 +149,6 @@ flowchart TD
 4. **Plan consistency checks and saving:** decide how to prevent invalid changes to the game state and how to save and load games.
 5. **Prepare for Semester 2:** select suitable technologies and implement the planned core features.
 
-The main goal of this semester is to produce a clear specification and a realistic technical plan before implementation begins.
 
 ---
 <!-- @slide End -->
